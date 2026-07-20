@@ -6,11 +6,282 @@
     <title>Ayobami & Adebowale — Wedding 2026</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         html { scroll-behavior: smooth; }
         .bg-mint { background-color: #e8f5e9; }
         .text-burgundy { color: #800020; }
         .bg-burgundy { background-color: #800020; }
+/* Refined Registry Section Styling */
+/* FIX: Prevents cards from overlapping/collapsing in the grid */
+.registry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    align-items: stretch; /* Ensures all cards in a row keep equal height */
+}
+
+.registry-item {
+    height: 100%; /* Force full card stretch */
+    box-sizing: border-box;
+}
+
+.item-details {
+    margin-bottom: 12px; /* Adds space above status badge */
+}
+
+.status-badge {
+    margin-top: auto; /* Pushes badge neatly to bottom of every card */
+    margin-bottom: 10px;
+}
+.registry h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #800020;
+    margin-bottom: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.registry-intro {
+    font-size: 1.05rem;
+    color: #555;
+    margin-bottom: 50px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Upgraded Cards Layout */
+.registry-item {
+    background: #ffffff;
+    border: 1px solid rgba(138, 115, 85, 0.18);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    transition: all 0.35s ease;
+    cursor: pointer;
+}
+
+.registry-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 30px -10px rgba(128, 0, 32, 0.15);
+    border-color: #8a7355;
+}
+
+.registry-item img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-bottom: 1px solid #f4f0ea;
+    background-color: #faf9f6;
+    transition: transform 0.4s ease;
+}
+
+.registry-item:hover img {
+    transform: scale(1.03);
+}
+
+.item-details {
+    padding: 18px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.item-details span {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: #800020;
+    font-size: 1.1rem;
+    background: #fdf2f4;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.item-details p {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2c2c2c;
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
+.status-badge {
+    align-self: center;
+    width: 85%;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+        /* SELECTION OVERLAY STATE (When Picked) */
+        .registry-item.is-picked {
+            background-color: #fafafa;
+            border-color: #ddd;
+            opacity: 0.55;
+            pointer-events: none;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .registry-item.is-picked img {
+            filter: grayscale(100%);
+        }
+
+        .registry-item.is-picked p {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .registry-item.is-picked .status-badge {
+            background-color: #fce4d6;
+            color: #c65911;
+            border: 1px solid #f8cbad;
+        }
+
+        /* CASH GIFT BUTTON */
+        .cash-gift-container {
+            margin-top: 50px;
+        }
+
+        .cash-btn {
+            background-color: #800020;
+            color: white;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            border: none;
+        }
+
+        .cash-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* MODAL POPUP SYSTEM */
+        .modal {
+            display: none; /* Hides modals by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.55);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            text-align: left;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .modal h3 {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #800020;
+        }
+
+        .modal-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 18px;
+        }
+
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .submit-gift-btn, .next-btn, .paid-btn, .later-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: opacity 0.3s;
+        }
+
+        .submit-gift-btn, .next-btn { background-color: #8a7355; color: white; }
+        .paid-btn { background-color: #2e7d32; color: white; }
+        .later-btn { background-color: #f0f0f0; color: #333; }
+
+        .account-box {
+            background-color: #fdfbf7;
+            padding: 16px;
+            border: 1px dashed #8a7355;
+            border-radius: 8px;
+            margin: 16px 0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .copy-btn {
+            background: #8a7355;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -75,78 +346,393 @@
             </div>
         </div>
     </section>
-    <section class="py-20 px-6 max-w-xl mx-auto">
-        <h2 class="text-3xl font-serif text-center text-burgundy mb-8">Quick Hits Quiz</h2>
-        <div class="bg-white p-6 rounded-2xl shadow-sm space-y-4">
-            <div>
-                <p class="font-semibold mb-2">Go-to date-night order?</p>
-                <div id="quiz-lock-box" class="bg-gray-50 p-4 rounded-xl text-center">
-                    <button onclick="revealAnswers(this)" class="bg-burgundy text-white px-4 py-2 rounded-lg text-sm transition font-medium">Unlock Answers</button>
-                    <div class="hidden mt-4 space-y-1 text-left text-sm border-t pt-2">
-                        <p><strong>His Answer:</strong> Amala 🍲</p>
-                        <p><strong>Her Answer:</strong> Pasta 🍝</p>
-                        <p class="text-xs text-gray-400 italic mt-2">"Be like say the bride na Ajebutter sha" — Anonymous</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="gifts" class="py-20 bg-gradient-to-r from from-purple-500 to-blue-400 text-white px-6 text-center">
-        <div class="max-w-md mx-auto space-y-6">
-            <i class="fa-solid fa-gift text-4xl text-amber-300"></i>
-            <h2 class="text-3xl font-serif">Gifts & Blessings</h2>
-            <p class="text-sm opacity-90 leading-relaxed">Your presence is our greatest gift. However, if you wish to bless us with a monetary gift, our verified details are below:</p>
-            
-            <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-lg space-y-2 text-left">
-                <p class="text-xs uppercase text-gray-400 font-bold">Account Name</p>
-                <p class="font-semibold text-lg">ADEOLA ADEBOWALE CALEB</p>
-                <p class="text-xs uppercase text-gray-400 font-bold mt-2">Bank</p>
-                <p class="font-semibold text-lg">FIDELITY BANK</p>
-                
-                <p class="text-xs uppercase text-gray-400 font-bold mt-2">Account Number</p>
-                <button id="account-btn" onclick="handleAccountCopy()" class="w-full mt-1 py-3 bg-gray-100 hover:bg-gray-200 rounded-xl font-mono font-bold tracking-widest text-center transition text-sm">
-                    Tap to reveal
-                </button>
-                <p class="text-[10px] text-gray-400 text-center mt-1">Tap once to reveal, tap again to copy to your clipboard.</p>
-            </div>
-        </div>
-    </section>
-    <script>
-       
-        function revealAnswers(buttonElement) {
-            const hiddenDiv = buttonElement.nextElementSibling;
-            hiddenDiv.classList.toggle('hidden');
-            if(!hiddenDiv.classList.contains('hidden')){
-                buttonElement.innerText = "Hide Answers";
-            } else {
-                buttonElement.innerText = "Unlock Answers";
-            }
-        }
-
+   <section class="registry" id="gifts">
+        <h2>Gift Registry</h2>
+        <p class="registry-intro">If you wish to honor us with a gift, please click an item below to claim it so guests don't pick the same thing twice:</p>
         
-        let revealed = false;
-        const accountNumber = "6172622517"; // Replace with real account number securely
+        <div class="registry-grid" id="registryGrid">
+            <div class="registry-item" data-item="1">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ73uMiTtjQe2_V4YSjcQl1wzZnQqZlFWvQfTd_QrL4g&s=10" alt="Refrigerator">
+                <div class="item-details">
+                    <span>1</span><p>Inverter Refrigerator/Freezer</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="2">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2H1g4HB0khu-NAkUrYodDAKr8-hi4_AxF4r_RuCNhLA&s=10" alt="Gas Cooker">
+                <div class="item-details">
+                    <span>2</span><p>Gas Cooker (4 Burner + Oven)</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="3">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8tmYhLBmtG6IS4RRtj9RI-zI7ghHGD1hOc1aftTUcQ&s=10" alt="Microwave">
+                <div class="item-details">
+                    <span>3</span><p>Microwave</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIc7AEZqZ6tQ0RjGC0VGK-xQy4wKmC6vFUtw0J6odYrg&s=10" alt="Blender">
+                <div class="item-details">
+                    <span>4</span><p>Blender</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="5">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYFAdEwtyFuqhmcTaNF6aWwdRFA__l8AtApnmza-hu0w&s=10" alt="Fan or AC">
+                <div class="item-details">
+                    <span>5</span><p>Rechargeable Mist Fan or 1.5hp AC</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="6">
+                <img src="data:image/avif;base64,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" alt="Washing Machine">
+                <div class="item-details">
+                    <span>6</span><p>Washing Machine (Fully Auto)</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="7">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDtJTswEmnC_Xa4gkWBXDu7rhAMI-5TRj_-hb850pbiA&s=10" alt="Rice Cooker">
+                <div class="item-details">
+                    <span>7</span><p>Rice Cooker</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="8">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBFvHv5jCAnGzh3kaXwLKwYMdYxTBs9K5OCpXc0LfRgQ&s=10" alt="Toaster">
+                <div class="item-details">
+                    <span>8</span><p>Toaster or Toaster Oven</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="9">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8HeK64K7s5IMhlPlqIrtlkfKFljpomHGhHSi_BlyMhQ&s=10" alt="Electric Iron">
+                <div class="item-details">
+                    <span>9</span><p>Electric Iron + Ironing Board</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="10">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrPZuNP0yD7yVMglzw2R1_K82wGutBKR7yRqeWfUcpJw&s=10" alt="Food Processor">
+                <div class="item-details">
+                    <span>10</span><p>Food Processor</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="11">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTajahs3SCox_tU0Dy9NN7Emu_HcDucqXib13XHFYqZIw&s=10" alt="Vacuum Cleaner">
+                <div class="item-details">
+                    <span>11</span><p>Vacuum Cleaner</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="12">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJnwnI4PxLd2BdkzCv47GqZyKxx1pehXZYIdJWoojGsw&s=10" alt="Water Heater">
+                <div class="item-details">
+                    <span>12</span><p>Water Heater/Geyser</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="13">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn1N5eFZ4Ky62mG5r0nfnuTlPav0Vzi_GbkOmXNBW1qw&s=10" alt="Air Fryer">
+                <div class="item-details">
+                    <span>13</span><p>Air Fryer</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="14">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRIOuy5INFaNsi0dC5L8S84fsJO7M0KVzKNBrTGergTw&s=10" alt="Stabilizer">
+                <div class="item-details">
+                    <span>14</span><p>Digital Automatic Voltage Stabilizer</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="15">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-ye1xjSRl81p4UPcj8h4UZQjHc2Z6vlLW_7RQ4yXm4w&s=10" alt="Juice Extractor">
+                <div class="item-details">
+                    <span>15</span><p>Multi Electric Juice Extractor</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="16">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiv8q5wdIpqkEIM1gd-xj2fVfDaHCDe7R-xI6OyZLDIA&s=10" alt="Hot plate">
+                <div class="item-details">
+                    <span>16</span><p>Hot plate</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="17">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4LdVGP1Z_yMsxYKyThAzld2Intq1Uk3VfFt8jxaspfg&s=10" alt="Pressure Pot">
+                <div class="item-details">
+                    <span>17</span><p>Pressure Pot</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="18">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4_GkMh0nuXOcK2hnq1sjk4APqYodFl78-fxGwfgoOlg&s=10" alt="Nonstick Pots">
+                <div class="item-details">
+                    <span>18</span><p>Nonstick Pot Set</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="13">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-t0mw-_SVm3DmPMc0vNRiM2wAYkOaX6LeSeK6ya7cPQ&s=10" alt="Wall Clock">
+                <div class="item-details">
+                    <span>19</span><p>DIY Glow in the Dark Wall Clocks 3D</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="20">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdGzH54vNudN_9yQLL7QPnbMiUlWjNV2hoZKaMBKAAUw&s=10" alt="Frying Pan">
+                <div class="item-details">
+                    <span>20</span><p>Nonstick Frying Pan</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+        </div>
+    </section>
+    <!-- MODAL A: Physical Gift Info Capture -->
+<div id="physicalGiftModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('physicalGiftModal')">&times;</span>
+        <h3>Claim Your Gift</h3>
+        <p class="modal-subtitle">You are claiming: <strong id="selectedGiftName" style="color: #8a7355;"></strong></p>
+        <form id="physicalGiftForm">
+            <input type="text" id="giftGuestName" placeholder="Your Full Name" required>
+            <input type="email" id="giftGuestEmail" placeholder="Your Email Address" required>
+            <input type="text" id="giftCardNum" placeholder="Invitation Card Number" required>
+            <button type="button" class="submit-gift-btn" onclick="submitPhysicalGiftClaim()">Confirm & Claim Gift ➔</button>
+        </form>
+    </div>
+</div>
 
-        function handleAccountCopy() {
-            const btn = document.getElementById('account-btn');
-            if (!revealed) {
-                btn.innerText = accountNumber;
-                btn.classList.remove('bg-gray-100');
-                btn.classList.add('bg-amber-100', 'text-amber-900');
-                revealed = true;
-            } else {
-                navigator.clipboard.writeText(accountNumber);
-                const originalText = btn.innerText;
-                btn.innerText = "✓ Copied to Clipboard!";
-                btn.classList.remove('bg-amber-100');
-                btn.classList.add('bg-emerald-100', 'text-emerald-900');
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('bg-emerald-100', 'text-emerald-900');
-                    btn.classList.add('bg-amber-100', 'text-amber-900');
-                }, 2000);
-            }
+<!-- CASH GIFT SECTION -->
+<section id="cash-gift" class="py-16 px-6 bg-gradient-to-b from-amber-50/50 to-emerald-50/30">
+    <div class="max-w-xl mx-auto bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-amber-100">
+        <div class="text-center mb-6">
+            <h3 class="text-2xl md:text-3xl font-serif text-burgundy font-bold mt-3">Cash Gift Transfer</h3>
+            <p class="text-sm text-gray-600 mt-2">Prefer to send a monetary gift instead? Kindly fill in your details below to reveal our bank account information.</p>
+        </div>
+
+        <form id="cashForm" class="space-y-4">
+            <div>
+                <label for="cashAmount" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Amount (₦)</label>
+                <input type="number" id="cashAmount" placeholder="e.g. 50000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+            </div>
+
+            <div>
+                <label for="cashName" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Full Name</label>
+                <input type="text" id="cashName" placeholder="e.g. John Doe" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+            </div>
+
+            <div>
+                <label for="cashEmail" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Email Address</label>
+                <input type="email" id="cashEmail" placeholder="e.g. john@example.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+            </div>
+
+            <div>
+                <label for="cashCardNum" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Invitation Card Number</label>
+                <input type="text" id="cashCardNum" placeholder="e.g. AA-104" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+            </div>
+
+            <div>
+                <label for="cashMessage" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Message for Couple (Optional)</label>
+                <textarea id="cashMessage" placeholder="Leave a sweet message..." rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+            </div>
+
+            <button type="button" class="w-full bg-burgundy hover:opacity-90 text-white font-bold py-3.5 px-6 rounded-lg shadow-md transition duration-200 mt-2" onclick="openBankModal()">
+                Proceed to Bank Details ➔
+            </button>
+        </form>
+    </div>
+</section>
+<!-- BANK DETAILS POPUP MODAL -->
+<div id="bankDetailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('bankDetailsModal')">&times;</span>
+        <h3>Bank Transfer Details</h3>
+        <p class="modal-subtitle">Kindly make your transfer using the details below:</p>
+
+        <div class="account-box">
+            <p><strong>Bank:</strong> Fidelity Bank</p>
+            <p><strong>Account Name:</strong> Adebowale Adeola Caleb</p>
+            <p>
+                <strong>Account No:</strong> <span id="accNum">6172622517</span>
+                <button type="button" class="copy-btn" onclick="copyAccountNumber()">Copy</button>
+            </p>
+        </div>
+
+        <button type="button" class="paid-btn" onclick="closeModal('bankDetailsModal')">I Have Made Payment</button>
+    </div>
+</div>
+<script>
+// Global tracking states
+let currentSelectedCardElement = null;
+let globalCashData = {};
+
+document.addEventListener("DOMContentLoaded", () => {
+    const registryGrid = document.getElementById("registryGrid");
+    const cashGiftBtn = document.getElementById("cashGiftBtn");
+
+    // 1. Sync and lock previously claimed items from local browser memory
+    const pickedItems = JSON.parse(localStorage.getItem("weddingGiftsClaimed")) || [];
+    document.querySelectorAll(".registry-item").forEach(item => {
+        const itemId = item.getAttribute("data-item");
+        if (pickedItems.includes(itemId)) {
+            markAsPicked(item);
         }
+    });
+
+    // 2. Click handler for physical gifts grid - Opens input modal seamlessly
+    if (registryGrid) {
+        registryGrid.addEventListener("click", (e) => {
+            const itemCard = e.target.closest(".registry-item");
+            if (!itemCard) return;
+
+            // Stop logic completely if item is already locked
+            if (itemCard.classList.contains("is-picked")) return;
+
+            const itemName = itemCard.querySelector(".item-details p").innerText;
+            currentSelectedCardElement = itemCard;
+
+            // Inject gift name into the modal header and reveal modal overlay
+            document.getElementById("selectedGiftName").innerText = itemName;
+            document.getElementById("physicalGiftModal").style.display = "flex";
+        });
+    }
+
+    // 3. Cash Flow trigger action linkage
+    if (cashGiftBtn) {
+        cashGiftBtn.addEventListener("click", () => {
+            document.getElementById("cashDetailsModal").style.display = "flex";
+        });
+    }
+});
+
+// CORE ACTION: Close modals safely
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
+// SUBMIT: Process details for Physical Item claim
+function submitPhysicalGiftClaim() {
+    const name = document.getElementById("giftGuestName").value.trim();
+    const email = document.getElementById("giftGuestEmail").value.trim();
+    const cardNum = document.getElementById("giftCardNum").value.trim();
+
+    if (!name || !email || !cardNum) {
+        alert("Please fill out all information fields to claim this item.");
+        return;
+    }
+
+    const itemText = currentSelectedCardElement.querySelector(".item-details p").innerText;
+
+    // --- DATA CAPTURE OUTLET ---
+    console.log("SUCCESS! Physical Gift Captured:", {
+        itemChosen: itemText,
+        guestName: name,
+        guestEmail: email,
+        invitationNumber: cardNum
+    });
+
+    // Write item claim to browser storage array
+    const itemId = currentSelectedCardElement.getAttribute("data-item");
+    const pickedItems = JSON.parse(localStorage.getItem("weddingGiftsClaimed")) || [];
+    pickedItems.push(itemId);
+    localStorage.setItem("weddingGiftsClaimed", JSON.stringify(pickedItems));
+
+    // Visually freeze the card asset
+    markAsPicked(currentSelectedCardElement);
+    closeModal("physicalGiftModal");
+    document.getElementById("physicalGiftForm").reset();
+
+    alert(`Thank you, ${name}! Your gift choice ("${itemText}") has been locked down.`);
+}
+
+// SUBMIT: Process details from Cash Input View over to Bank Account View
+function openBankModal() {
+    const amount = document.getElementById("cashAmount").value.trim();
+    const name = document.getElementById("cashName").value.trim();
+    const email = document.getElementById("cashEmail").value.trim();
+    const cardNum = document.getElementById("cashCardNum").value.trim();
+    const msg = document.getElementById("cashMessage").value.trim();
+
+    if (!amount || !name || !email || !cardNum) {
+        alert("Please fill out all required fields.");
+        return;
+    }
+
+    // Retain input data globally
+    globalCashData = { amount, name, email, cardNum, msg };
+
+    closeModal("cashDetailsModal");
+    document.getElementById("bankDetailsModal").style.display = "flex";
+}
+
+// UTILITY: Direct clipboard copy action
+function copyAccount() {
+    const accNum = document.getElementById("accountNum").innerText;
+    navigator.clipboard.writeText(accNum).then(() => {
+        alert("Account number copied! 👍");
+    }).catch(() => {
+        alert("Failed to copy automatically. Please copy manually.");
+    });
+}
+
+// SUBMIT: User clicks 'I've Paid'
+function handlePaid() {
+    console.log("CASH COMPLETED RECEIPT DATA:", globalCashData);
+    alert(`Thank you, ${globalCashData.name}! We will verify your gift of ₦${globalCashData.amount} soon.`);
+    closeModal("bankDetailsModal");
+    document.getElementById("cashForm").reset();
+}
+
+// SUBMIT: User clicks 'I'll Pay Later'
+function handlePayLater() {
+    console.log("CASH RESERVED PROMISE DATA:", globalCashData);
+    alert(`No problem, ${globalCashData.name}! We have saved your details. An email reminder has been sent to ${globalCashData.email}.`);
+    closeModal("bankDetailsModal");
+    document.getElementById("cashForm").reset();
+}
+
+// UI RENDERER: Gray out card and apply permanent "Chosen" stamp
+function markAsPicked(element) {
+    element.classList.add("is-picked");
+    const badge = element.querySelector(".status-badge");
+    if (badge) badge.innerText = "Chosen";
+}
+// Function to open Bank Details Modal
+function openBankModal() {
+    document.getElementById('bankDetailsModal').style.display = 'flex';
+}
+
+// Function to close any modal
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+// Function to copy Account Number to Clipboard
+function copyAccountNumber() {
+    const accNumber = document.getElementById('accNum').innerText;
+    navigator.clipboard.writeText(accNumber).then(() => {
+        alert("Account number copied: " + accNumber);
+    }).catch(err => {
+        console.error("Failed to copy: ", err);
+    });
+}
+// Paste this inside your <script> tags to easily reset from your JS file
+// Quick reset function for testing — call this in your browser console or run once:
+// Quick reset function for testing
+function resetGifts() {
+    localStorage.removeItem("weddingGiftsClaimed");
+    alert("Test data cleared! Refreshing page...");
+    location.reload();
+}
+
+// RUN THE RESET DIRECTLY:
+
     </script>
 </body>
 </html>
