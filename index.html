@@ -12,127 +12,170 @@
         .bg-mint { background-color: #e8f5e9; }
         .text-burgundy { color: #800020; }
         .bg-burgundy { background-color: #800020; }
-/* Refined Registry Section Styling */
-/* FIX: Prevents cards from overlapping/collapsing in the grid */
-.registry-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-    align-items: stretch; /* Ensures all cards in a row keep equal height */
-}
 
-.registry-item {
-    height: 100%; /* Force full card stretch */
-    box-sizing: border-box;
-}
+        .registry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            align-items: stretch; /* Ensures all cards in a row keep equal height */
+        }
 
-.item-details {
-    margin-bottom: 12px; /* Adds space above status badge */
-}
+        .registry-item {
+            height: 100%; /* Force full card stretch */
+            box-sizing: border-box;
+        }
 
-.status-badge {
-    margin-top: auto; /* Pushes badge neatly to bottom of every card */
-    margin-bottom: 10px;
-}
-.registry h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 2.5rem;
-    color: #800020;
-    margin-bottom: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
+        .item-details {
+            margin-bottom: 12px; /* Adds space above status badge */
+        }
 
-.registry-intro {
-    font-size: 1.05rem;
-    color: #555;
-    margin-bottom: 50px;
-    max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-}
+        .status-badge {
+            margin-top: auto; /* Pushes badge neatly to bottom of every card */
+            margin-bottom: 10px;
+        }
 
-/* Upgraded Cards Layout */
-.registry-item {
-    background: #ffffff;
-    border: 1px solid rgba(138, 115, 85, 0.18);
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 18px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-    transition: all 0.35s ease;
-    cursor: pointer;
-}
+        .registry h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #800020;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
 
-.registry-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 18px 30px -10px rgba(128, 0, 32, 0.15);
-    border-color: #8a7355;
-}
+        .registry-intro {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 50px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
 
-.registry-item img {
-    width: 100%;
-    height: 210px;
-    object-fit: cover;
-    border-bottom: 1px solid #f4f0ea;
-    background-color: #faf9f6;
-    transition: transform 0.4s ease;
-}
+        /* Upgraded Cards Layout */
+        .registry-item {
+            background: #ffffff;
+            border: 1px solid rgba(138, 115, 85, 0.18);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 18px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
 
-.registry-item:hover img {
-    transform: scale(1.03);
-}
+        .registry-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 30px -10px rgba(128, 0, 32, 0.15);
+            border-color: #8a7355;
+        }
 
-.item-details {
-    padding: 18px 16px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    text-align: left;
-    flex-grow: 1;
-}
+        .registry-item img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            border-bottom: 1px solid #f4f0ea;
+            background-color: #faf9f6;
+            transition: transform 0.4s ease;
+        }
 
-.item-details span {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    color: #800020;
-    font-size: 1.1rem;
-    background: #fdf2f4;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
+        .registry-item:hover img {
+            transform: scale(1.03);
+        }
 
-.item-details p {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #2c2c2c;
-    line-height: 1.4;
-    margin-top: 2px;
-}
+        .item-details {
+            padding: 18px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            text-align: left;
+            flex-grow: 1;
+        }
 
-.status-badge {
-    align-self: center;
-    width: 85%;
-    text-align: center;
-    padding: 8px 0;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-radius: 20px;
-    background-color: #e8f5e9;
-    color: #2e7d32;
-    border: 1px solid #a5d6a7;
-}
+        .item-details span {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: #800020;
+            font-size: 1.1rem;
+            background: #fdf2f4;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .item-details p {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2c2c2c;
+            line-height: 1.4;
+            margin-top: 2px;
+        }
+
+        .status-badge {
+            align-self: center;
+            width: 85%;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 20px;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        /* Nav Dropdown Styling */
+        .nav-item.dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            padding: 8px 0;
+            list-style: none;
+            z-index: 1000;
+            border: 1px solid rgba(138, 115, 85, 0.2);
+        }
+
+        .dropdown-menu li a {
+            color: #2c2c2c;
+            padding: 10px 18px;
+            display: block;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-align: left;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #fdf2f4;
+            color: #800020;
+        }
+
+        /* Reveal dropdown on hover */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+        }
 
         /* SELECTION OVERLAY STATE (When Picked) */
         .registry-item.is-picked {
@@ -257,6 +300,17 @@
         .paid-btn { background-color: #2e7d32; color: white; }
         .later-btn { background-color: #f0f0f0; color: #333; }
 
+        .registry-item.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .status-badge.taken {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+
         .account-box {
             background-color: #fdfbf7;
             padding: 16px;
@@ -282,6 +336,33 @@
             display: flex;
             gap: 10px;
         }
+        /* Container to center the clock alignment relative to the names */
+  .clock-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px; /* Adjust spacing below the couple's names */
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .clock-widget {
+    background: rgba(17, 24, 39, 0.85); 
+    backdrop-filter: blur(10px);       
+    color: #a855f7;                    
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-align: center;
+    
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 
+                0 0 12px rgba(168, 85, 247, 0.25);
+  }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -294,61 +375,59 @@
             <a href="#schedule" class="hover:text-burgundy transition">Schedule</a>
             <a href="#gifts" class="hover:text-burgundy transition">Gifts</a>
         </div>
-        <a href="#rsvp" class="bg-burgundy text-white px-4 py-2 rounded-full text-sm font-bold uppercase hover:opacity-90 transition">RSVP</a>
+        <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle">RSVP ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="tel:+2348000000001"> Best Man (0800 000 0001)</a></li>
+                <li><a href="tel:+2348000000002"> Maid of Honor (0800 000 0002)</a></li>
+                <li><a href="tel:+2348000000003"> Event Coordinator (0800 000 0003)</a></li>
+                <li><a href="tel:+2348000000004"> Family Contact (0800 000 0004)</a></li>
+            </ul>
+        </li>
     </nav>
+
     <header class="min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center px-4 relative" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1920');">
         <div id="story" class="text-white space-y-4">
             <h1 class="text-4xl md:text-7xl font-serif tracking-wide">Ayobami & Adebowale</h1>
-            <p class="text-xl md:text-2xl italic tracking-widest">By His Grace, Together Forever, A Beautiful Beginning</p>
+            <p class="text-xl md:text-2xl italic tracking-widest">A Forever kind of Love 💍</p>
             <div class="w-24 h-0.5 bg-white mx-auto my-4"></div>
-            <p class="text-lg md:text-xl font-light">October 30th – 31st, 2026 • Akure, Nigeria</p>
-            <p class="bg-white/20 inline-block px-4 py-1 rounded-full text-xs uppercase tracking-widest backdrop-blur-sm">The celebration has begun!</p>
+            <p class="text-lg md:text-xl font-light">October 31st, 2026 • Akure, Nigeria</p>
+            <div id="digital-clock" class="clock-widget">
+    00d 00h 00m 00s
+</div>
         </div>
         <div class="absolute bottom-10 text-white animate-bounce">
             <p class="text-xs uppercase tracking-widest mb-2">Scroll</p>
             <i class="fa-solid fa-chevron-down"></i>
         </div>
     </header>     
+
     <section id="schedule" class="py-20 bg-gray-100 px-6">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-serif text-center text-burgundy mb-12">Our Schedule</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-8 rounded-2xl shadow-sm bg-gradient-to-r from-purple-300 to-blue-200">
-                    <span class="text-xs font-bold tracking-widest text-amber-600 uppercase">Day One</span>
+                    <span class="text-xs font-bold tracking-widest text-amber-600 uppercase">D-Day</span>
                     <h3 class="text-xl font-bold mt-1">Traditional Wedding</h3>
-                    <p class="text-sm text-gray-500 mb-4">Friday, October 30th, 2026</p>
-                    <div class="flex space-x-2 mb-6">
-                        <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs rounded-full font-semibold">Male: Mint Green</span>
-                        <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full font-semibold">Female: Burgundy</span>
-                    </div>
-                    <ul class="space-y-4 text-sm">
-                        <li class="flex justify-between border-b pb-2"><span class="text-gray-500">2:00 PM</span> <strong>Guests Arrive & Seating</strong></li>
-                        <li class="flex justify-between border-b pb-2"><span class="text-gray-500">4:00 PM</span> <strong>Bride Price Ceremony</strong></li>
-                        <li class="flex justify-between pb-2"><span class="text-gray-500">5:30 PM</span> <strong>Feasting & Party</strong></li>
-                    </ul>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl shadow-sm bg-gradient-to-r from-grey-800 to-pink-300">
-                    <span class="text-xs font-bold tracking-widest text-emerald-600 uppercase">The D-day</span>
-                    <h3 class="text-xl font-bold mt-1">White Wedding</h3>
                     <p class="text-sm text-gray-500 mb-4">Saturday, October 31st, 2026</p>
                     <div class="flex space-x-2 mb-6">
                         <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs rounded-full font-semibold">Male: Mint Green</span>
                         <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full font-semibold">Female: Burgundy</span>
                     </div>
                     <ul class="space-y-4 text-sm">
-                        <li class="flex justify-between border-b pb-2"><span class="text-gray-500">10:00 AM</span> <strong>Church Service</strong></li>
-                        <li class="flex justify-between border-b pb-2"><span class="text-gray-500">1:00 PM</span> <strong>Reception Event</strong></li>
-                        <li class="flex justify-between pb-2"><span class="text-gray-500">4:30 PM</span> <strong>First Dance</strong></li>
+                        <li class="flex justify-between border-b pb-2"><span class="text-gray-500">2:00 PM</span> <strong>Guests Arrive & Seating</strong></li>
+                        <li class="flex justify-between border-b pb-2"><span class="text-gray-500">4:00 PM</span> <strong>Engagement Program</strong></li>
+                        <li class="flex justify-between pb-2"><span class="text-gray-500">5:30 PM</span> <strong>Feasting & Party</strong></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-   <section class="registry" id="gifts">
+
+    <section class="registry" id="gifts">
         <h2>Gift Registry</h2>
-        <p class="registry-intro">If you wish to honor us with a gift, please click an item below to claim it so guests don't pick the same thing twice:</p>
+        <p class="registry-intro">If you wish to honor us with a gift, please choose an item below, click and pick it so guests don't pick the same thing twice:</p>
         
         <div class="registry-grid" id="registryGrid">
             <div class="registry-item" data-item="1">
@@ -387,7 +466,7 @@
                 <div class="status-badge">Available</div>
             </div>
             <div class="registry-item" data-item="6">
-                <img src="data:image/avif;base64,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" alt="Washing Machine">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeH67SafdOdDtGr-M3hqkigyOZN6G50-JPIJY3mBfISw&s=10" alt="Washing Machine">
                 <div class="item-details">
                     <span>6</span><p>Washing Machine (Fully Auto)</p>
                 </div>
@@ -477,7 +556,7 @@
                 </div>
                 <div class="status-badge">Available</div>
             </div>
-            <div class="registry-item" data-item="13">
+            <div class="registry-item" data-item="19">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-t0mw-_SVm3DmPMc0vNRiM2wAYkOaX6LeSeK6ya7cPQ&s=10" alt="Wall Clock">
                 <div class="item-details">
                     <span>19</span><p>DIY Glow in the Dark Wall Clocks 3D</p>
@@ -491,61 +570,90 @@
                 </div>
                 <div class="status-badge">Available</div>
             </div>
+            <div class="registry-item" data-id="item-2" data-max="3" data-claimed="0" onclick="handleItemSelect(this)">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRinJ5g0l7KHV6ZKu0g67IHoJ9cxH23LCqh8sgWVbX5rA&s=10" alt="Serving Tray">
+                <div class="item-details">
+                    <span>21</span><p>Serving Tray</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-id="item-2" data-max="3" data-claimed="0" onclick="handleItemSelect(this)">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRleTi7Gu7pfYv6gBkT_me8ldrybgVhEoDjddvYAz0gTQ&s=10" alt="Duvet and bedding set">
+                <div class="item-details">
+                    <span>22</span><p>Duvet and bedding set</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-id="item-2" data-max="6" data-claimed="0" onclick="handleItemSelect(this)">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTukZnECcYkosOAU1XOqhWXEKgIZgW6aHw1lcvUsYn5Cg&s=10" alt="Grocery hamper">
+                <div class="item-details">
+                    <span>23</span><p>Grocery hamper</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+
+        
+            <div class="registry-item" data-id="item-2" data-max="3" data-claimed="0" onclick="handleItemSelect(this)">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSAUJvCInAS8RE-unY-Fe-EKhfDPNbJXMu43ibWFEjcQ&s=10" alt="Shoe Rack">
+                <div class="item-details">
+                    <span>24</span>
+                    <p>Shoe Rack</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
         </div>
     </section>
+
     <!-- MODAL A: Physical Gift Info Capture -->
-<div id="physicalGiftModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('physicalGiftModal')">&times;</span>
-        <h3>Claim Your Gift</h3>
-        <p class="modal-subtitle">You are claiming: <strong id="selectedGiftName" style="color: #8a7355;"></strong></p>
-        <form id="physicalGiftForm">
-            <input type="text" id="giftGuestName" placeholder="Your Full Name" required>
-            <input type="email" id="giftGuestEmail" placeholder="Your Email Address" required>
-            <input type="text" id="giftCardNum" placeholder="Invitation Card Number" required>
-            <button type="button" class="submit-gift-btn" onclick="submitPhysicalGiftClaim()">Confirm & Claim Gift ➔</button>
-        </form>
-    </div>
-</div>
-
-<!-- CASH GIFT SECTION -->
-<section id="cash-gift" class="py-16 px-6 bg-gradient-to-b from-amber-50/50 to-emerald-50/30">
-    <div class="max-w-xl mx-auto bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-amber-100">
-        <div class="text-center mb-6">
-            <h3 class="text-2xl md:text-3xl font-serif text-burgundy font-bold mt-3">Cash Gift Transfer</h3>
-            <p class="text-sm text-gray-600 mt-2">Prefer to send a monetary gift instead? Kindly fill in your details below to reveal our bank account information.</p>
+    <div id="physicalGiftModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('physicalGiftModal')">&times;</span>
+            <h3>Select Your Gift</h3>
+            <p class="modal-subtitle">You are picking: <strong id="selectedGiftName" style="color: #8a7355;"></strong></p>
+            <form id="physicalGiftForm">
+                <input type="text" id="giftGuestName" placeholder="Your Full Name" required>
+                <input type="email" id="giftGuestEmail" placeholder="Your Email Address" required>
+                <div>
+                    <label for="cashCardNum" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
+                        Invitation Card Number <span class="text-gray-400 font-normal">(Optional)</span>
+                    </label>
+                    <input type="text" id="cashCardNum" placeholder="e.g. AA-104 (If available)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                <button type="button" class="submit-gift-btn" onclick="submitPhysicalGiftClaim()">Confirm ➔</button>
+            </form>
         </div>
+    </div>
 
-        <form id="cashForm" class="space-y-4">
-            <div>
-                <label for="cashAmount" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Amount (₦)</label>
-                <input type="number" id="cashAmount" placeholder="e.g. 50000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+    <!-- CASH GIFT SECTION -->
+    <section id="cash-gift" class="py-16 px-6 bg-gradient-to-b from-amber-50/50 to-emerald-50/30">
+        <div class="max-w-xl mx-auto bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-amber-100">
+            <div class="text-center mb-6">
+                <h3 class="text-2xl md:text-3xl font-serif text-burgundy font-bold mt-3">Cash Gift Transfer</h3>
+                <p class="text-sm text-gray-600 mt-2">Prefer to send a monetary gift instead? Kindly fill in your details below to reveal our bank account information.</p>
             </div>
 
-            <div>
-                <label for="cashName" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Full Name</label>
-                <input type="text" id="cashName" placeholder="e.g. John Doe" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
-            </div>
+            <form id="cashForm" class="space-y-4">
+                <div>
+                    <label for="cashAmount" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Amount (₦)</label>
+                    <input type="number" id="cashAmount" placeholder="e.g. 50000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+                </div>
 
-            <div>
-                <label for="cashEmail" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Email Address</label>
-                <input type="email" id="cashEmail" placeholder="e.g. john@example.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
-            </div>
+                <div>
+                    <label for="cashName" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Full Name</label>
+                    <input type="text" id="cashName" placeholder="e.g. John Doe" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+                </div>
 
-            <div>
-                <label for="cashCardNum" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Invitation Card Number</label>
-                <input type="text" id="cashCardNum" placeholder="e.g. AA-104" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
-            </div>
-
-            <div>
-                <label for="cashMessage" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Message for Couple (Optional)</label>
-                <textarea id="cashMessage" placeholder="Leave a sweet message..." rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
-            </div>
-
+                <div>
+                    <label for="cashEmail" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Email Address</label>
+                    <input type="email" id="cashEmail" placeholder="e.g. john@example.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+                </div>
+            </form>
+        </div>
+    
             <button type="button" class="w-full bg-burgundy hover:opacity-90 text-white font-bold py-3.5 px-6 rounded-lg shadow-md transition duration-200 mt-2" onclick="openBankModal()">
                 Proceed to Bank Details ➔
             </button>
-        </form>
+        </section>
     </div>
 </section>
 <!-- BANK DETAILS POPUP MODAL -->
@@ -575,59 +683,82 @@ let globalCashData = {};
 document.addEventListener("DOMContentLoaded", () => {
     const registryGrid = document.getElementById("registryGrid");
     const cashGiftBtn = document.getElementById("cashGiftBtn");
+    const registryItems = document.querySelectorAll('.registry-item');
 
-    // 1. Sync and lock previously claimed items from local browser memory
-    const pickedItems = JSON.parse(localStorage.getItem("weddingGiftsClaimed")) || [];
-    document.querySelectorAll(".registry-item").forEach(item => {
+    // 1. Sync counts and lock status from local browser storage on load
+    const pickedItems = JSON.parse(localStorage.getItem("weddingGiftsClaimed")) || {};
+
+    registryItems.forEach(item => {
         const itemId = item.getAttribute("data-item");
-        if (pickedItems.includes(itemId)) {
-            markAsPicked(item);
+        
+        // Restore claimed counts from localStorage if saved
+        if (pickedItems[itemId] !== undefined) {
+            item.dataset.claimed = pickedItems[itemId];
         }
+        
+        updateItemBadge(item);
     });
 
-    // 2. Click handler for physical gifts grid - Opens input modal seamlessly
+    // 2. Click handler for physical gifts grid - Opens input modal
     if (registryGrid) {
         registryGrid.addEventListener("click", (e) => {
             const itemCard = e.target.closest(".registry-item");
             if (!itemCard) return;
 
-            // Stop logic completely if item is already locked
-            if (itemCard.classList.contains("is-picked")) return;
+            const max = parseInt(itemCard.dataset.max || "1", 10);
+            const claimed = parseInt(itemCard.dataset.claimed || "0", 10);
 
-            const itemName = itemCard.querySelector(".item-details p").innerText;
+            // Stop logic completely if item is fully claimed
+            if (claimed >= max || itemCard.classList.contains("is-picked") || itemCard.classList.contains("disabled")) {
+                return;
+            }
+
+            const itemName = itemCard.querySelector(".item-details p")?.innerText || "Selected Gift";
             currentSelectedCardElement = itemCard;
 
-            // Inject gift name into the modal header and reveal modal overlay
-            document.getElementById("selectedGiftName").innerText = itemName;
-            document.getElementById("physicalGiftModal").style.display = "flex";
+            // Inject gift name into modal header and reveal modal overlay
+            const giftNameHeading = document.getElementById("selectedGiftName");
+            if (giftNameHeading) giftNameHeading.innerText = itemName;
+            
+            const physicalModal = document.getElementById("physicalGiftModal");
+            if (physicalModal) physicalModal.style.display = "flex";
         });
     }
 
     // 3. Cash Flow trigger action linkage
     if (cashGiftBtn) {
         cashGiftBtn.addEventListener("click", () => {
-            document.getElementById("cashDetailsModal").style.display = "flex";
+            const cashModal = document.getElementById("cashDetailsModal");
+            if (cashModal) cashModal.style.display = "flex";
         });
     }
 });
 
 // CORE ACTION: Close modals safely
 function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = "none";
 }
 
 // SUBMIT: Process details for Physical Item claim
 function submitPhysicalGiftClaim() {
-    const name = document.getElementById("giftGuestName").value.trim();
-    const email = document.getElementById("giftGuestEmail").value.trim();
-    const cardNum = document.getElementById("giftCardNum").value.trim();
+    const nameInput = document.getElementById("giftGuestName");
+    const emailInput = document.getElementById("giftGuestEmail");
+    const cardNumInput = document.getElementById("giftCardNum");
+
+    const name = nameInput ? nameInput.value.trim() : "";
+    const email = emailInput ? emailInput.value.trim() : "";
+    const cardNum = cardNumInput ? cardNumInput.value.trim() : "";
 
     if (!name || !email || !cardNum) {
         alert("Please fill out all information fields to claim this item.");
         return;
     }
 
-    const itemText = currentSelectedCardElement.querySelector(".item-details p").innerText;
+    if (!currentSelectedCardElement) return;
+
+    const itemText = currentSelectedCardElement.querySelector(".item-details p")?.innerText || "Gift Item";
+    const itemId = currentSelectedCardElement.getAttribute("data-item");
 
     // --- DATA CAPTURE OUTLET ---
     console.log("SUCCESS! Physical Gift Captured:", {
@@ -637,27 +768,39 @@ function submitPhysicalGiftClaim() {
         invitationNumber: cardNum
     });
 
-    // Write item claim to browser storage array
-    const itemId = currentSelectedCardElement.getAttribute("data-item");
-    const pickedItems = JSON.parse(localStorage.getItem("weddingGiftsClaimed")) || [];
-    pickedItems.push(itemId);
+    // Update claimed counts
+    let claimed = parseInt(currentSelectedCardElement.dataset.claimed || "0", 10);
+    claimed++;
+    currentSelectedCardElement.dataset.claimed = claimed;
+
+    // Write item claim to browser storage
+    const pickedItems = JSON.parse(localStorage.getItem("weddingGiftsClaimed")) || {};
+    pickedItems[itemId] = claimed;
     localStorage.setItem("weddingGiftsClaimed", JSON.stringify(pickedItems));
 
-    // Visually freeze the card asset
-    markAsPicked(currentSelectedCardElement);
+    // Update UI badge status
+    updateItemBadge(currentSelectedCardElement);
+
     closeModal("physicalGiftModal");
-    document.getElementById("physicalGiftForm").reset();
+    const form = document.getElementById("physicalGiftForm");
+    if (form) form.reset();
 
     alert(`Thank you, ${name}! Your gift choice ("${itemText}") has been locked down.`);
 }
 
 // SUBMIT: Process details from Cash Input View over to Bank Account View
 function openBankModal() {
-    const amount = document.getElementById("cashAmount").value.trim();
-    const name = document.getElementById("cashName").value.trim();
-    const email = document.getElementById("cashEmail").value.trim();
-    const cardNum = document.getElementById("cashCardNum").value.trim();
-    const msg = document.getElementById("cashMessage").value.trim();
+    const amountInput = document.getElementById("cashAmount");
+    const nameInput = document.getElementById("cashName");
+    const emailInput = document.getElementById("cashEmail");
+    const cardNumInput = document.getElementById("cashCardNum");
+    const msgInput = document.getElementById("cashMessage");
+
+    const amount = amountInput ? amountInput.value.trim() : "";
+    const name = nameInput ? nameInput.value.trim() : "";
+    const email = emailInput ? emailInput.value.trim() : "";
+    const cardNum = cardNumInput ? cardNumInput.value.trim() : "";
+    const msg = msgInput ? msgInput.value.trim() : "";
 
     if (!amount || !name || !email || !cardNum) {
         alert("Please fill out all required fields.");
@@ -668,71 +811,102 @@ function openBankModal() {
     globalCashData = { amount, name, email, cardNum, msg };
 
     closeModal("cashDetailsModal");
-    document.getElementById("bankDetailsModal").style.display = "flex";
+    const bankModal = document.getElementById("bankDetailsModal");
+    if (bankModal) bankModal.style.display = "flex";
 }
 
 // UTILITY: Direct clipboard copy action
 function copyAccount() {
-    const accNum = document.getElementById("accountNum").innerText;
+    const accElement = document.getElementById("accountNum") || document.getElementById("accNum");
+    if (!accElement) return;
+
+    const accNum = accElement.innerText;
     navigator.clipboard.writeText(accNum).then(() => {
-        alert("Account number copied! 👍");
-    }).catch(() => {
+        alert("Account number copied: " + accNum);
+    }).catch(err => {
+        console.error("Failed to copy: ", err);
         alert("Failed to copy automatically. Please copy manually.");
     });
+}
+
+// Alias for compatibility if called elsewhere in HTML
+function copyAccountNumber() {
+    copyAccount();
 }
 
 // SUBMIT: User clicks 'I've Paid'
 function handlePaid() {
     console.log("CASH COMPLETED RECEIPT DATA:", globalCashData);
-    alert(`Thank you, ${globalCashData.name}! We will verify your gift of ₦${globalCashData.amount} soon.`);
+    alert(`Thank you, ${globalCashData.name || 'Guest'}! We will verify your gift of ₦${globalCashData.amount || ''} soon.`);
     closeModal("bankDetailsModal");
-    document.getElementById("cashForm").reset();
+    const cashForm = document.getElementById("cashForm");
+    if (cashForm) cashForm.reset();
 }
 
 // SUBMIT: User clicks 'I'll Pay Later'
 function handlePayLater() {
     console.log("CASH RESERVED PROMISE DATA:", globalCashData);
-    alert(`No problem, ${globalCashData.name}! We have saved your details. An email reminder has been sent to ${globalCashData.email}.`);
+    alert(`No problem, ${globalCashData.name || 'Guest'}! We have saved your details. An email reminder has been sent to ${globalCashData.email || ''}.`);
     closeModal("bankDetailsModal");
-    document.getElementById("cashForm").reset();
+    const cashForm = document.getElementById("cashForm");
+    if (cashForm) cashForm.reset();
 }
 
-// UI RENDERER: Gray out card and apply permanent "Chosen" stamp
-function markAsPicked(element) {
-    element.classList.add("is-picked");
-    const badge = element.querySelector(".status-badge");
-    if (badge) badge.innerText = "Chosen";
-}
-// Function to open Bank Details Modal
-function openBankModal() {
-    document.getElementById('bankDetailsModal').style.display = 'flex';
-}
+// UI RENDERER: Updates badges & status styles dynamically
+function updateItemBadge(item) {
+    const max = parseInt(item.dataset.max || "1", 10);
+    const claimed = parseInt(item.dataset.claimed || "0", 10);
+    const remaining = max - claimed;
+    const badge = item.querySelector('.status-badge');
 
-// Function to close any modal
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
+    if (remaining <= 0) {
+        if (badge) badge.textContent = 'Taken';
+        item.classList.add('is-picked', 'disabled', 'taken');
+    } else {
+        // Always display "Available" regardless of max quantity or items remaining
+        if (badge) badge.textContent = 'Available';
+        item.classList.remove('is-picked', 'disabled', 'taken');
+    }
 }
-
-// Function to copy Account Number to Clipboard
-function copyAccountNumber() {
-    const accNumber = document.getElementById('accNum').innerText;
-    navigator.clipboard.writeText(accNumber).then(() => {
-        alert("Account number copied: " + accNumber);
-    }).catch(err => {
-        console.error("Failed to copy: ", err);
-    });
-}
-// Paste this inside your <script> tags to easily reset from your JS file
-// Quick reset function for testing — call this in your browser console or run once:
-// Quick reset function for testing
+// Quick reset function for testing via browser console
 function resetGifts() {
     localStorage.removeItem("weddingGiftsClaimed");
     alert("Test data cleared! Refreshing page...");
     location.reload();
 }
+// 1. Set your exact event target date and time here (YYYY-MM-DDTHH:MM:SS)
+  const targetDate = new Date("2026-10-30T10:00:00").getTime();
 
-// RUN THE RESET DIRECTLY:
+  function updateCountdown() {
+      const clockElement = document.getElementById('digital-clock');
+      const now = new Date().getTime();
+      const difference = targetDate - now;
 
+      // 2. If the target date has passed, show completion message
+      if (difference <= 0) {
+          clockElement.innerText = "The Celebration is Here!";
+          return;
+      }
+
+      // 3. Mathematical breakdown of time units
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      // 4. Format numbers with leading zeros (e.g., 05 instead of 5)
+      const formattedDays = String(days).padStart(2, '0');
+      const formattedHours = String(hours).padStart(2, '0');
+      const formattedMinutes = String(minutes).padStart(2, '0');
+      const formattedSeconds = String(seconds).padStart(2, '0');
+
+      // 5. Render to widget
+      clockElement.innerText = `${formattedDays}d ${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
+  }
+
+  // Run timer every second
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
     </script>
 </body>
 </html>
