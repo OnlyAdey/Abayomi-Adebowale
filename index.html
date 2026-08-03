@@ -427,7 +427,7 @@
 
     <section class="registry" id="gifts">
         <h2>Gift Registry</h2>
-        <p class="registry-intro">If you wish to honor us with a gift, please choose an item below, click and pick it so guests don't pick the same thing twice:</p>
+        <p class="registry-intro">If you wish to honor us with a gift, please choose an item below:</p>
         
         <div class="registry-grid" id="registryGrid">
             <div class="registry-item" data-item="1">
@@ -591,16 +591,6 @@
                 </div>
                 <div class="status-badge">Available</div>
             </div>
-
-        
-            <div class="registry-item" data-id="item-2" data-max="3" data-claimed="0" onclick="handleItemSelect(this)">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSAUJvCInAS8RE-unY-Fe-EKhfDPNbJXMu43ibWFEjcQ&s=10" alt="Shoe Rack">
-                <div class="item-details">
-                    <span>24</span>
-                    <p>Shoe Rack</p>
-                </div>
-                <div class="status-badge">Available</div>
-            </div>
         </div>
     </section>
 
@@ -608,7 +598,7 @@
     <div id="physicalGiftModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('physicalGiftModal')">&times;</span>
-            <h3>Select Your Gift</h3>
+            <h3>Select Gift</h3>
             <p class="modal-subtitle">You are picking: <strong id="selectedGiftName" style="color: #8a7355;"></strong></p>
             <form id="physicalGiftForm">
                 <input type="text" id="giftGuestName" placeholder="Your Full Name" required>
