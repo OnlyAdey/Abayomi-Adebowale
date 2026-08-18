@@ -27,12 +27,11 @@ services:
 databases:
   - name: wedding-db
     # Render-managed Postgres. Change version/plan/region as needed.
-    engine: postgres
-    version: "14"
-    plan: starter
+    postgresMajorVersion: "14"
+    plan: free
     region: oregon
     # disk is GB for persistent storage
-    disk: 10
+    diskSizeGB: 10
 
 # Optional: you can define more services (workers, cron jobs) or envVars/secrets here.
 # See https://render.com/docs/render-manifest for details and additional options.
