@@ -374,6 +374,7 @@
             <a href="#party" class="hover:text-burgundy transition">Wedding Party</a>
             <a href="#schedule" class="hover:text-burgundy transition">Schedule</a>
             <a href="#gifts" class="hover:text-burgundy transition">Gifts</a>
+            <a href="admin.html" class="hover:text-burgundy transition">Admin</a>
         </div>
         <li class="nav-item dropdown">
             <a href="javascript:void(0)" class="nav-link dropdown-toggle">RSVP ▾</a>
@@ -422,16 +423,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-8 rounded-2xl shadow-sm bg-gradient-to-r from-purple-300 to-blue-200">
                     <span class="text-xs font-bold tracking-widest text-amber-600 uppercase">D-Day</span>
-                    <h3 class="text-xl font-bold mt-1">Traditional Wedding</h3>
                     <p class="text-sm text-gray-500 mb-4">Saturday, October 31st, 2026</p>
                     <div class="flex space-x-2 mb-6">
                         <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs rounded-full font-semibold">Color of the Day: Beige, Coffe brown, Gold & White</span>
                     </div>
-                    <ul class="space-y-4 text-sm">
-                        <li class="flex justify-between border-b pb-2"><span class="text-gray-500">2:00 PM</span> <strong>Guests Arrive & Seating</strong></li>
-                        <li class="flex justify-between border-b pb-2"><span class="text-gray-500">4:00 PM</span> <strong>Engagement Program</strong></li>
-                        <li class="flex justify-between pb-2"><span class="text-gray-500">5:30 PM</span> <strong>Feasting & Party</strong></li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -609,10 +604,10 @@
                 <input type="text" id="giftGuestName" placeholder="Your Full Name" required>
                 <input type="email" id="giftGuestEmail" placeholder="Your Email Address" required>
                 <div>
-                    <label for="cashCardNum" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
+                    <label for="physicalCardNum" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
                         Invitation Card Number <span class="text-gray-400 font-normal">(Optional)</span>
                     </label>
-                    <input type="text" id="cashCardNum" placeholder="e.g. AA-104 (If available)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <input type="text" id="physicalCardNum" placeholder="e.g. AA-104 (If available)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none">
                 </div>
                 <button type="button" class="submit-gift-btn" onclick="submitPhysicalGiftClaim()">Confirm ➔</button>
             </form>
@@ -684,16 +679,16 @@
 let currentSelectedCardElement = null;
 let globalCashData = {};
 
+// DOM load: setup registry, sync storage, and menu toggle
 document.addEventListener("DOMContentLoaded", () => {
     const registryGrid = document.getElementById("registryGrid");
-    const cashGiftBtn = document.getElementById("cashGiftBtn");
     const registryItems = document.querySelectorAll('.registry-item');
 
     // Sync counts and lock status from local browser storage on load
     const pickedItems = JSON.parse(localStorage.getItem("weddingGiftsClaimed")) || {};
 
     registryItems.forEach(item => {
-        const itemId = item.getAttribute("data-item");
+        const itemId = item.getAttribute("data-item") || item.getAttribute('data-id');
         if (pickedItems[itemId] !== undefined) {
             item.dataset.claimed = pickedItems[itemId];
         }
@@ -723,11 +718,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (cashGiftBtn) {
-        cashGiftBtn.addEventListener("click", () => {
-            const cashModal = document.getElementById("cashDetailsModal");
-            if (cashModal) cashModal.style.display = "flex";
-        });
+    // Mobile menu toggle
+    const menuToggleBtn = document.getElementById("menuToggleBtn");
+    const mobileNav = document.getElementById("mobileNav");
+    if (menuToggleBtn && mobileNav) {
+        menuToggleBtn.addEventListener("click", () => mobileNav.classList.toggle("hidden"));
+        mobileNav.querySelectorAll("a").forEach(link => link.addEventListener('click', () => {
+            if (window.innerWidth < 768) mobileNav.classList.add('hidden');
+        }));
     }
 });
 
@@ -760,8 +758,7 @@ function openBankModal() {
     // Retain input data globally
     globalCashData = { amount, name, email, cardNum, msg };
 
-    // Hide cash section modal (if active) and display bank details modal
-    closeModal("cashDetailsModal");
+    // Display bank details modal
     const bankModal = document.getElementById("bankDetailsModal");
     if (bankModal) bankModal.style.display = "flex";
 }
@@ -780,17 +777,75 @@ function copyAccount() {
     });
 }
 
-function copyAccountNumber() {
-    copyAccount();
-}
+function copyAccountNumber() { copyAccount(); }
 
-// SUBMIT: User clicks 'I Have Made Payment'
-function handlePaid() {
-    console.log("CASH COMPLETED RECEIPT DATA:", globalCashData);
-    alert(`Thank you, ${globalCashData.name || 'Guest'}! We will verify your gift of ₦${globalCashData.amount || ''} soon.`);
+// SUBMIT: User clicks 'I Have Made Payment' -> record on server
+async function handlePaid() {
+    try {
+        // send record to backend
+        const res = await fetch('/api/cash', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                full_name: globalCashData.name,
+                email: globalCashData.email,
+                amount: globalCashData.amount,
+                card_num: globalCashData.cardNum,
+                message: globalCashData.msg
+            })
+        });
+        const j = await res.json();
+        if (!res.ok) throw new Error(j.error || 'failed');
+        alert(`Thank you, ${globalCashData.name || 'Guest'}! We recorded your gift of ₦${globalCashData.amount || ''}.`);
+    } catch (err) {
+        console.error('record payment error', err);
+        alert('Unable to record payment now. Please try again later.');
+    }
     closeModal("bankDetailsModal");
     const cashForm = document.getElementById("cashForm");
     if (cashForm) cashForm.reset();
+    globalCashData = {};
+}
+
+// SUBMIT: Physical gift claim from modal -> send to server and update UI
+async function submitPhysicalGiftClaim() {
+    if (!currentSelectedCardElement) return alert('No item selected');
+    const guestName = document.getElementById('giftGuestName')?.value.trim();
+    const guestEmail = document.getElementById('giftGuestEmail')?.value.trim();
+    const cardNum = document.getElementById('physicalCardNum')?.value.trim();
+
+    if (!guestName || !guestEmail) return alert('Please provide your name and email to claim a gift.');
+
+    const itemId = currentSelectedCardElement.getAttribute('data-item') || currentSelectedCardElement.getAttribute('data-id');
+    const itemName = currentSelectedCardElement.querySelector('.item-details p')?.innerText || '';
+
+    try {
+        const res = await fetch('/api/gifts/claim', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ guest_name: guestName, email: guestEmail, item_id: itemId, item_name: itemName, card_num: cardNum })
+        });
+        const j = await res.json();
+        if (!res.ok) throw new Error(j.error || 'failed');
+
+        // update claimed counters locally
+        const current = parseInt(currentSelectedCardElement.dataset.claimed || '0', 10) + 1;
+        currentSelectedCardElement.dataset.claimed = String(current);
+        const idKey = itemId;
+        const pickedItems = JSON.parse(localStorage.getItem('weddingGiftsClaimed') || '{}');
+        pickedItems[idKey] = current;
+        localStorage.setItem('weddingGiftsClaimed', JSON.stringify(pickedItems));
+        updateItemBadge(currentSelectedCardElement);
+
+        alert('Gift claim recorded. Thank you!');
+    } catch (err) {
+        console.error('claim error', err);
+        alert('Could not record gift claim. Please try again later.');
+    }
+
+    closeModal('physicalGiftModal');
+    const form = document.getElementById('physicalGiftForm'); if (form) form.reset();
+    currentSelectedCardElement = null;
 }
 
 // UI RENDERER: Updates badges & status styles dynamically
@@ -839,25 +894,6 @@ function updateCountdown() {
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
-document.addEventListener("DOMContentLoaded", () => {
-    const menuToggleBtn = document.getElementById("menuToggleBtn");
-    const mobileNav = document.getElementById("mobileNav");
-
-    if (menuToggleBtn && mobileNav) {
-        menuToggleBtn.addEventListener("click", () => {
-            mobileNav.classList.toggle("hidden");
-        });
-
-        // Close menu automatically when a link is clicked
-        mobileNav.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", () => {
-                if (window.innerWidth < 768) {
-                    mobileNav.classList.add("hidden");
-                }
-            });
-        });
-    }
-});
-    </script>
+</script>
 </body>
 </html>
