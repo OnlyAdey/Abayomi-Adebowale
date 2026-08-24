@@ -1,11 +1,27 @@
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const db = require('./db');
+const pool = require('./db');
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+
+// Serve static HTML files (index.html, admin.html) from your folder
+app.use(express.static('.'));
+
+// Test route to check if database works
+app.get('/test-db', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT NOW()');
+    res.json({ message: "Database connected!", time: result.rows[0].now });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'changeme';
 
