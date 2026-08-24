@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin - Dashboard</title>
+  <style>
+    body{font-family:Arial;padding:20px;background:#f8fafc}
+    .card{background:#fff;border-radius:8px;padding:16px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .tabs{display:flex;gap:8px;margin-bottom:12px}
+    button{padding:8px 12px;border-radius:6px;border:1px solid #ddd;background:#fff;cursor:pointer}
+    button.active{background:#111827;color:#fff;border-color:#111827}
+    table{width:100%;border-collapse:collapse}
+    td,th{border:1px solid #eee;padding:8px}
+    th{background:#f3f4f6;text-align:left}
+    .row-actions{display:flex;gap:8px}
+  </style>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <div class="card">
+    <label>Admin Password</label>
+    <input id="adminPass" type="password" placeholder="password" />
+    <button id="savePass">Save</button>
+    <small>Saved password is stored locally in your browser for session convenience.</small>
+  </div>
+
+  <div class="tabs">
+    <button data-tab="orders" class="active">Orders</button>
+    <button data-tab="payments">Payments</button>
+    <button data-tab="gifts">Gifts</button>
+  </div>
+
+  <div id="content"></div>
+
+  <script>
+    function getPass(){
+      return document.getElementById('adminPass').value || localStorage.getItem('adminPass') || '';
+    }
+
+    document.getElementById('savePass').addEventListener('click', ()=>{
+      const val = document.getElementById('adminPass').value;
+      if (!val) return alert('Enter password to save');
+      localStorage.setItem('adminPass', val);
+      alert('Saved locally');
+    });
+
+    document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click', async (e)=>{
+      document.querySelectorAll('[data-tab]').forEach(b=>b.classList.remove('active'));
+      e.target.classList.add('active');
+      const tab = e.target.getAttribute('data-tab');
+      const pass = getPass();
+      if (!pass) return alert('Please enter admin password and save it before loading data');
+      if (tab === 'orders') return loadOrders(pass);
+      if (tab === 'payments') return loadPayments(pass);
+      if (tab === 'gifts') return loadGifts(pass);
+    }));
+
+    async function loadOrders(pass){
+      const res = await fetch('/api/admin/orders', { headers: { 'X-ADMIN-PASS': pass }});
+      const j = await res.json();
+      if (!res.ok) return alert('Error: '+(j.error||'unauthorized'));
+      const html = ['<table><tr><th>ID</th><th>User</th><th>Email</th><th>Total</th><th>Paid</th><th>Date</th></tr>'];
+      j.forEach(o=> html.push(`<tr><td>${o.id}</td><td>${o.full_name||''}</td><td>${o.email||''}</td><td>${o.total_amount||''}</td><td>${o.paid}</td><td>${o.created_at}</td></tr>`));
+      html.push('</table>'); document.getElementById('content').innerHTML = html.join('');
+    }
+
+    async function loadPayments(pass){
+      const res = await fetch('/api/admin/payments', { headers: { 'X-ADMIN-PASS': pass }});
+      const j = await res.json();
+      if (!res.ok) return alert('Error: '+(j.error||'unauthorized'));
+      const html = ['<table><tr><th>ID</th><th>Name</th><th>Email</th><th>Amount</th><th>Verified</th><th>Date</th></tr>'];
+      j.forEach(p=> html.push(`<tr><td>${p.id}</td><td>${p.full_name}</td><td>${p.email}</td><td>₦${p.amount}</td><td>${p.verified}</td><td>${p.created_at}</td></tr>`));
+      html.push('</table>'); document.getElementById('content').innerHTML = html.join('');
+    }
+
+    async function loadGifts(pass){
+      const res = await fetch('/api/admin/gifts', { headers: { 'X-ADMIN-PASS': pass }});
+      const j = await res.json();
+      if (!res.ok) return alert('Error: '+(j.error||'unauthorized'));
+      const html = ['<table><tr><th>ID</th><th>Name</th><th>Email</th><th>Item ID</th><th>Item</th><th>Date</th></tr>'];
+      j.forEach(g=> html.push(`<tr><td>${g.id}</td><td>${g.guest_name}</td><td>${g.email}</td><td>${g.item_id}</td><td>${g.item_name}</td><td>${g.created_at}</td></tr>`));
+      html.push('</table>'); document.getElementById('content').innerHTML = html.join('');
+    }
+
+    // auto-load default
+    const saved = localStorage.getItem('adminPass'); if (saved) document.getElementById('adminPass').value = saved; loadOrders(getPass());
+  </script>
+</body>
+</html>
