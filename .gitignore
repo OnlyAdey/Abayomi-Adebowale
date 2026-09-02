@@ -1,0 +1,13 @@
+﻿node_modules/
+.env
+.env.*
+!.env.example
+dev.sqlite
+*.sqlite
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+test-results/
+playwright-report/
+.DS_Store
+*.log

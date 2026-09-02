@@ -1,37 +1,25 @@
-# Render manifest for deploying a web backend + managed Postgres database.
-# Adapt `env`, `buildCommand`, and `startCommand` for your backend (Node/Python/Rails/etc.).
-# After pushing this file to your Git repo, connect the repo on render.com and Render
-# will create the services defined below (or you can create them manually and use the
-# values here as a guide).
+# Render manifest for the wedding registry web service.
+# The database is Neon PostgreSQL (provisioned separately, not by Render);
+# its connection string is supplied through the DATABASE_URL env var.
+# DATABASE_URL, ADMIN_PASSWORD and SESSION_SECRET are marked `sync: false`
+# (set in the Render dashboard) and must be set before the service starts.
 
 services:
   - type: web
     name: wedding-backend
-    # Change env to node | python | docker | static as appropriate for your project
     env: node
     region: oregon
     plan: starter
     branch: main
-    # Update these commands to match your project (example shown for Node.js)
-    buildCommand: npm install && npm run build
+    healthCheckPath: /api/health
+    buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
-      # Leave DATABASE_URL empty here; after the database is provisioned, set
-      # an environment variable named DATABASE_URL in the Render dashboard
-      # pointing to the connection string, or update this value accordingly.
       - key: DATABASE_URL
-        value: ""
-
-databases:
-  - name: wedding-db
-    # Render-managed Postgres. Change version/plan/region as needed.
-    postgresMajorVersion: "14"
-    plan: free
-    region: oregon
-    # disk is GB for persistent storage
-    diskSizeGB: 10
-
-# Optional: you can define more services (workers, cron jobs) or envVars/secrets here.
-# See https://render.com/docs/render-manifest for details and additional options.
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SESSION_SECRET
+        sync: false

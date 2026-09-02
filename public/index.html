@@ -1,0 +1,1079 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayobami & Adebowale â€” Wedding 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        .bg-mint { background-color: #e8f5e9; }
+        .text-burgundy { color: #800020; }
+        .bg-burgundy { background-color: #800020; }
+
+        .registry {
+            padding: 56px 16px 48px;
+        }
+
+        .registry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            align-items: stretch; /* Ensures all cards in a row keep equal height */
+        }
+
+        .registry-item {
+            height: 100%; /* Force full card stretch */
+            box-sizing: border-box;
+        }
+
+        .item-details {
+            margin-bottom: 12px; /* Adds space above status badge */
+        }
+
+        .status-badge {
+            margin-top: auto; /* Pushes badge neatly to bottom of every card */
+            margin-bottom: 10px;
+        }
+
+        .registry h2 {
+            font-family: serif;
+            font-size: 2.5rem;
+            color: #800020;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .registry-intro {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 50px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Upgraded Cards Layout */
+        .registry-item {
+            background: #ffffff;
+            border: 1px solid rgba(138, 115, 85, 0.18);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 18px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+
+        .registry-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 30px -10px rgba(128, 0, 32, 0.15);
+            border-color: #8a7355;
+        }
+
+        .registry-item img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            border-bottom: 1px solid #f4f0ea;
+            background-color: #faf9f6;
+            transition: transform 0.4s ease;
+        }
+
+        .registry-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .item-details {
+            padding: 18px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .item-details span {
+            font-family: serif;
+            font-weight: 700;
+            color: #800020;
+            font-size: 1.1rem;
+            background: #fdf2f4;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .item-details p {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2c2c2c;
+            line-height: 1.4;
+            margin-top: 2px;
+        }
+
+        .status-badge {
+            align-self: center;
+            width: 85%;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 20px;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        /* Nav Dropdown Styling */
+        .nav-item.dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            padding: 8px 0;
+            list-style: none;
+            z-index: 1000;
+            border: 1px solid rgba(138, 115, 85, 0.2);
+        }
+
+        .dropdown-menu li a {
+            color: #2c2c2c;
+            padding: 10px 18px;
+            display: block;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-align: left;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #fdf2f4;
+            color: #800020;
+        }
+
+        /* Reveal dropdown on hover */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-link.dropdown-toggle {
+            display: inline-block;
+            padding: 10px 12px;
+            line-height: 1.2;
+        }
+
+        /* SELECTION OVERLAY STATE (When Picked) */
+        .registry-item.is-picked {
+            background-color: #fafafa;
+            border-color: #ddd;
+            opacity: 0.55;
+            pointer-events: none;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .registry-item.is-picked img {
+            filter: grayscale(100%);
+        }
+
+        .registry-item.is-picked p {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .registry-item.is-picked .status-badge {
+            background-color: #fce4d6;
+            color: #c65911;
+            border: 1px solid #f8cbad;
+        }
+
+        /* CASH GIFT BUTTON */
+        .cash-gift-container {
+            margin-top: 50px;
+        }
+
+        .cash-btn {
+            background-color: #800020;
+            color: white;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            border: none;
+        }
+
+        .cash-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* MODAL POPUP SYSTEM */
+        .modal {
+            display: none; /* Hides modals by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.55);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            text-align: left;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .modal h3 {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #800020;
+        }
+
+        .modal-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 18px;
+        }
+
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .submit-gift-btn, .next-btn, .paid-btn, .later-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: opacity 0.3s;
+        }
+
+        .submit-gift-btn, .next-btn { background-color: #8a7355; color: white; }
+        .paid-btn { background-color: #2e7d32; color: white; }
+        .later-btn { background-color: #f0f0f0; color: #333; }
+
+        .registry-item.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .status-badge.taken {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+
+        .account-box {
+            background-color: #fdfbf7;
+            padding: 16px;
+            border: 1px dashed #8a7355;
+            border-radius: 8px;
+            margin: 16px 0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .copy-btn {
+            background: #8a7355;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-left: 8px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+        /* Container to center the clock alignment relative to the names */
+  .clock-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px; /* Adjust spacing below the couple's names */
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .clock-widget {
+    background: rgba(17, 24, 39, 0.85); 
+    backdrop-filter: blur(10px);       
+    color: #a855f7;                    
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(1rem, 4.5vw, 1.3rem);
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-align: center;
+    
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 
+                0 0 12px rgba(168, 85, 247, 0.25);
+  }
+        :focus-visible {
+            outline: 2px solid #800020;
+            outline-offset: 2px;
+        }
+
+        .close-btn {
+            border: none;
+            background: none;
+            line-height: 1;
+            min-width: 36px;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .rsvp-phone {
+            display: block;
+            background: #800020;
+            color: #fff;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .rsvp-phone:hover {
+            background: #6b001b;
+        }
+
+        @media (max-width: 767px) {
+            #menuToggleBtn {
+                position: absolute;
+                top: 1rem;
+                left: 1rem;
+                z-index: 50;
+            }
+            #mobileNav {
+                position: absolute;
+                top: 3.5rem;
+                left: 1rem;
+                right: 1rem;
+                width: auto;
+                max-height: calc(100vh - 5rem);
+                overflow-y: auto;
+                z-index: 40;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 20px;
+            }
+            .registry-item img {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <nav class="sticky top-0 z-50 bg-white shadow-md py-4 px-6 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold text-burgundy tracking-widest">A & A</a>
+        <div class="hidden md:flex space-x-6 text-sm font-semibold uppercase tracking-wider">
+            <a href="#story" class="hover:text-burgundy transition">Our Story</a>
+            <a href="#schedule" class="hover:text-burgundy transition">Schedule</a>
+            <a href="#gifts" class="hover:text-burgundy transition">Gifts</a>
+            <a href="admin.html" class="hover:text-burgundy transition">Admin</a>
+        </div>
+        <div class="nav-item dropdown">
+            <a href="#rsvp" class="nav-link dropdown-toggle">RSVP â–¾</a>
+            <ul class="dropdown-menu">
+                <li><a href="tel:+2348167900645"> 0816 790 0645</a></li>
+                <li><a href="tel:+2349039738934"> 0903 973 8934</a></li>
+                <li><a href="tel:+2348140851696"> 0814 085 1696</a></li>
+                <li><a href="tel:+2347049186657"> 0704 918 6657</a></li>
+            </ul>
+        </div>
+    </nav>
+    <header class="min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center px-4 relative" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1920');">
+        <!-- Mobile Hamburger Button -->
+        <button id="menuToggleBtn" type="button" class="md:hidden text-gray-700 p-2" aria-label="Open navigation menu" aria-controls="mobileNav" aria-expanded="false">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <!-- Navigation Menu -->
+        <nav id="mobileNav" class="hidden md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none p-4 md:p-0 space-y-3 md:space-y-0 md:space-x-6 text-sm font-medium border-t md:border-none border-gray-100">
+            <a href="#story" class="block text-gray-700 hover:text-amber-600">Our Story</a>
+            <a href="#schedule" class="block text-gray-700 hover:text-amber-600">Schedule</a>
+            <a href="#gifts" class="block text-gray-700 hover:text-amber-600">Registry</a>
+            <a href="#cash-gift" class="block text-gray-700 hover:text-amber-600">Cash Gift</a>
+            <a href="#rsvp" class="block text-gray-700 hover:text-amber-600">RSVP</a>
+            <a href="admin.html" class="block text-gray-700 hover:text-amber-600">Admin</a>
+        </nav>
+    <div id="story" class="text-white space-y-4">
+            <h1 class="text-3xl sm:text-4xl md:text-7xl font-serif tracking-wide leading-tight">Ayobami & Adebowale</h1>
+            <p class="text-xl md:text-2xl italic tracking-widest">A Forever kind of Love ðŸ’</p>
+            <div class="w-24 h-0.5 bg-white mx-auto my-4"></div>
+            <p class="text-lg md:text-xl font-light">October 31st, 2026 â€¢ Akure, Nigeria</p>
+            <div id="digital-clock" class="clock-widget">
+    00d 00h 00m 00s
+</div>
+        </div>
+        <div class="absolute bottom-10 text-white animate-bounce">
+            <p class="text-xs uppercase tracking-widest mb-2">Scroll</p>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </header>     
+
+    <section id="schedule" class="py-20 bg-gray-100 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-serif text-center text-burgundy mb-12">Our Schedule</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm bg-gradient-to-r from-purple-300 to-blue-200">
+                    <span class="text-xs font-bold tracking-widest text-amber-600 uppercase">D-Day</span>
+                    <p class="text-sm text-gray-500 mb-4">Saturday, October 31st, 2026</p>
+                    <div class="flex space-x-2 mb-6">
+                        <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs rounded-full font-semibold text-center leading-snug">Color of the Day: Beige, Coffee brown, Gold & White</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rsvp" class="py-20 bg-white px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-serif text-center text-burgundy mb-4">RSVP</h2>
+            <p class="text-gray-600 mb-8">Kindly confirm your attendance by calling or texting any of the numbers below.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+                <a class="rsvp-phone" href="tel:+2348167900645">0816 790 0645</a>
+                <a class="rsvp-phone" href="tel:+2349039738934">0903 973 8934</a>
+                <a class="rsvp-phone" href="tel:+2348140851696">0814 085 1696</a>
+                <a class="rsvp-phone" href="tel:+2347049186657">0704 918 6657</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="registry" id="gifts">
+        <h2>Gift Registry</h2>
+        <p class="registry-intro">If you wish to honor us with a gift, please choose an item below:</p>
+        
+        <div class="registry-grid" id="registryGrid">
+            <div class="registry-item" data-item="gift-1">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ73uMiTtjQe2_V4YSjcQl1wzZnQqZlFWvQfTd_QrL4g&s=10" alt="Refrigerator">
+                <div class="item-details">
+                    <span>1</span><p>Inverter Refrigerator/Freezer</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-2">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2H1g4HB0khu-NAkUrYodDAKr8-hi4_AxF4r_RuCNhLA&s=10" alt="Gas Cooker">
+                <div class="item-details">
+                    <span>2</span><p>Gas Cooker (4 Burner + Oven)</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-3">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8tmYhLBmtG6IS4RRtj9RI-zI7ghHGD1hOc1aftTUcQ&s=10" alt="Microwave">
+                <div class="item-details">
+                    <span>3</span><p>Microwave</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-4">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYFAdEwtyFuqhmcTaNF6aWwdRFA__l8AtApnmza-hu0w&s=10" alt="Fan or AC">
+                <div class="item-details">
+                    <span>4</span><p>Rechargeable Mist Fan or 1.5hp AC</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-5">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeH67SafdOdDtGr-M3hqkigyOZN6G50-JPIJY3mBfISw&s=10" alt="Washing Machine">
+                <div class="item-details">
+                    <span>5</span><p>Washing Machine (Fully Auto)</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-6">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDtJTswEmnC_Xa4gkWBXDu7rhAMI-5TRj_-hb850pbiA&s=10" alt="Rice Cooker">
+                <div class="item-details">
+                    <span>6</span><p>Rice Cooker</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-7">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBFvHv5jCAnGzh3kaXwLKwYMdYxTBs9K5OCpXc0LfRgQ&s=10" alt="Toaster">
+                <div class="item-details">
+                    <span>7</span><p>Toaster or Toaster Oven</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-8">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8HeK64K7s5IMhlPlqIrtlkfKFljpomHGhHSi_BlyMhQ&s=10" alt="Electric Iron">
+                <div class="item-details">
+                    <span>8</span><p>Electric Iron + Ironing Board</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-9">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrPZuNP0yD7yVMglzw2R1_K82wGutBKR7yRqeWfUcpJw&s=10" alt="Food Processor">
+                <div class="item-details">
+                    <span>9</span><p>Food Processor</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-10">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTajahs3SCox_tU0Dy9NN7Emu_HcDucqXib13XHFYqZIw&s=10" alt="Vacuum Cleaner">
+                <div class="item-details">
+                    <span>10</span><p>Vacuum Cleaner</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-11">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJnwnI4PxLd2BdkzCv47GqZyKxx1pehXZYIdJWoojGsw&s=10" alt="Water Heater">
+                <div class="item-details">
+                    <span>11</span><p>Water Heater/Geyser</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-12">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn1N5eFZ4Ky62mG5r0nfnuTlPav0Vzi_GbkOmXNBW1qw&s=10" alt="Air Fryer">
+                <div class="item-details">
+                    <span>12</span><p>Air Fryer</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-13">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRIOuy5INFaNsi0dC5L8S84fsJO7M0KVzKNBrTGergTw&s=10" alt="Stabilizer">
+                <div class="item-details">
+                    <span>13</span><p>Digital Automatic Voltage Stabilizer</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-14">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-ye1xjSRl81p4UPcj8h4UZQjHc2Z6vlLW_7RQ4yXm4w&s=10" alt="Juice Extractor">
+                <div class="item-details">
+                    <span>14</span><p>Multi Electric Juice Extractor</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-15">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiv8q5wdIpqkEIM1gd-xj2fVfDaHCDe7R-xI6OyZLDIA&s=10" alt="Hot plate">
+                <div class="item-details">
+                    <span>15</span><p>Hot plate</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-16">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4LdVGP1Z_yMsxYKyThAzld2Intq1Uk3VfFt8jxaspfg&s=10" alt="Pressure Pot">
+                <div class="item-details">
+                    <span>16</span><p>Pressure Pot</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-17">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4_GkMh0nuXOcK2hnq1sjk4APqYodFl78-fxGwfgoOlg&s=10" alt="Nonstick Pots">
+                <div class="item-details">
+                    <span>17</span><p>Nonstick Pot Set</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-18">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-t0mw-_SVm3DmPMc0vNRiM2wAYkOaX6LeSeK6ya7cPQ&s=10" alt="Wall Clock">
+                <div class="item-details">
+                    <span>18</span><p>DIY Glow in the Dark Wall Clocks 3D</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-19">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdGzH54vNudN_9yQLL7QPnbMiUlWjNV2hoZKaMBKAAUw&s=10" alt="Frying Pan">
+                <div class="item-details">
+                    <span>19</span><p>Nonstick Frying Pan</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-20">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRinJ5g0l7KHV6ZKu0g67IHoJ9cxH23LCqh8sgWVbX5rA&s=10" alt="Serving Tray">
+                <div class="item-details">
+                    <span>20</span><p>Serving Tray</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-21">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRleTi7Gu7pfYv6gBkT_me8ldrybgVhEoDjddvYAz0gTQ&s=10" alt="Duvet and bedding set">
+                <div class="item-details">
+                    <span>21</span><p>Duvet and bedding set</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+            <div class="registry-item" data-item="gift-22">
+                <img loading="lazy" decoding="async" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTukZnECcYkosOAU1XOqhWXEKgIZgW6aHw1lcvUsYn5Cg&s=10" alt="Grocery hamper">
+                <div class="item-details">
+                    <span>22</span><p>Grocery hamper</p>
+                </div>
+                <div class="status-badge">Available</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL A: Physical Gift Info Capture -->
+    <div id="physicalGiftModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="physicalModalTitle">
+        <div class="modal-content">
+            <button type="button" class="close-btn" aria-label="Close" onclick="closeModal('physicalGiftModal')">&times;</button>
+            <h3 id="physicalModalTitle">Select Gift</h3>
+            <p class="modal-subtitle">You are picking: <strong id="selectedGiftName" style="color: #8a7355;"></strong></p>
+            <form id="physicalGiftForm">
+                <label for="giftGuestName" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Full Name</label>
+                <input type="text" id="giftGuestName" placeholder="Your Full Name" required>
+                <label for="giftGuestEmail" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Email Address</label>
+                <input type="email" id="giftGuestEmail" placeholder="Your Email Address" required>
+                <div>
+                    <label for="physicalCardNum" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
+                        Invitation Card Number <span class="text-gray-400 font-normal">(Optional)</span>
+                    </label>
+                    <input type="text" id="physicalCardNum" placeholder="e.g. AA-104 (If available)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                <button type="button" class="submit-gift-btn" onclick="submitPhysicalGiftClaim()">Confirm âž”</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CASH GIFT SECTION -->
+<section id="cash-gift" class="py-16 px-6 bg-gradient-to-b from-amber-50/50 to-emerald-50/30">
+    <div class="max-w-xl mx-auto bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-amber-100">
+        <div class="text-center mb-6">
+            <h3 class="text-2xl md:text-3xl font-serif text-burgundy font-bold mt-3">Cash Gift Transfer</h3>
+            <p class="text-sm text-gray-600 mt-2">Prefer to send a monetary gift instead? Kindly fill in your details below to reveal our bank account information.</p>
+        </div>
+
+        <form id="cashForm" class="space-y-4">
+            <div>
+                <label for="cashAmount" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Amount (â‚¦)</label>
+                <input type="number" id="cashAmount" placeholder="e.g. 50000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+            </div>
+
+            <div>
+                <label for="cashName" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Full Name</label>
+                <input type="text" id="cashName" placeholder="e.g. John Doe" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+            </div>
+
+            <div>
+                <label for="cashEmail" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Your Email Address</label>
+                <input type="email" id="cashEmail" placeholder="e.g. john@example.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none" required>
+            </div>
+
+            <!-- Optional Invitation Card Number for Cash -->
+            <div>
+                <label for="cashCardNum" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
+                    Invitation Card Number <span class="text-gray-400 font-normal">(Optional)</span>
+                </label>
+                <input type="text" id="cashCardNum" placeholder="e.g. AA-104 (If available)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:outline-none">
+            </div>
+
+            <!-- Button placed INSIDE form card container -->
+            <button type="button" class="w-full bg-burgundy hover:opacity-90 text-white font-bold py-3.5 px-6 rounded-lg shadow-md transition duration-200 mt-4" onclick="openBankModal()">
+                Proceed to Bank Details âž”
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- BANK DETAILS POPUP MODAL -->
+<div id="bankDetailsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="bankModalTitle">
+    <div class="modal-content">
+        <button type="button" class="close-btn" aria-label="Close" onclick="closeModal('bankDetailsModal')">&times;</button>
+        <h3 id="bankModalTitle">Bank Transfer Details</h3>
+        <p class="modal-subtitle">Kindly make your transfer using the details below:</p>
+
+        <div class="account-box">
+            <p><strong>Bank:</strong> Fidelity Bank</p>
+            <p><strong>Account Name:</strong> Adebowale Adeola Caleb</p>
+            <p>
+                <strong>Account No:</strong> <span id="accNum">6172622517</span>
+                <button type="button" class="copy-btn" onclick="copyAccountNumber()">Copy</button>
+            </p>
+        </div>
+
+        <button type="button" class="paid-btn" onclick="handlePaid()">I Have Made Payment</button>
+    </div>
+</div>
+
+<script>
+// Wedding registry frontend logic.
+// Gift availability is loaded from the server (/api/gifts) - the database is the
+// source of truth. localStorage is intentionally NOT used for availability.
+
+let currentSelectedCardElement = null;
+let globalCashData = {};
+let lastFocusedElement = null;
+
+const GIFT_API = '/api/gifts';
+const CLAIM_API = '/api/gifts/claim';
+const CASH_API = '/api/cash';
+
+function newRequestId() {
+    if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+    return 'req-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+}
+
+async function loadGiftAvailability() {
+    try {
+        const res = await fetch(GIFT_API);
+        if (!res.ok) throw new Error('failed to load gifts');
+        const gifts = await res.json();
+        const byId = {};
+        gifts.forEach(g => { byId[g.id] = g; });
+        document.querySelectorAll('.registry-item').forEach(card => {
+            const id = card.getAttribute('data-item');
+            if (id && byId[id]) {
+                card.dataset.max = String(byId[id].max_claims);
+                card.dataset.claimed = String(byId[id].claimed);
+            } else {
+                card.dataset.max = '1';
+                card.dataset.claimed = '0';
+            }
+            updateItemBadge(card);
+        });
+    } catch (err) {
+        console.error('loadGiftAvailability error', err);
+    }
+}
+
+function updateItemBadge(item) {
+    const max = parseInt(item.dataset.max || '1', 10);
+    const claimed = parseInt(item.dataset.claimed || '0', 10);
+    const remaining = max - claimed;
+    const badge = item.querySelector('.status-badge');
+    if (remaining <= 0) {
+        if (badge) badge.textContent = 'Taken';
+        item.classList.add('is-picked', 'disabled', 'taken');
+    } else {
+        item.classList.remove('is-picked', 'disabled', 'taken');
+        if (badge) {
+            if (max > 1 && remaining < max) badge.textContent = remaining + ' left';
+            else badge.textContent = 'Available';
+        }
+    }
+}
+
+// DOM load: click handlers, mobile menu, initial availability fetch
+document.addEventListener('DOMContentLoaded', () => {
+    const registryGrid = document.getElementById('registryGrid');
+    if (registryGrid) {
+        registryGrid.addEventListener('click', (e) => {
+            const itemCard = e.target.closest('.registry-item');
+            if (!itemCard) return;
+            if (itemCard.classList.contains('is-picked') || itemCard.classList.contains('disabled')) return;
+
+            const itemName = itemCard.querySelector('.item-details p')?.innerText || 'Selected Gift';
+            currentSelectedCardElement = itemCard;
+
+            const giftNameHeading = document.getElementById('selectedGiftName');
+            if (giftNameHeading) giftNameHeading.innerText = itemName;
+
+            const physicalModal = document.getElementById('physicalGiftModal');
+            if (physicalModal) openModal('physicalGiftModal');
+        });
+    }
+
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    if (menuToggleBtn && mobileNav) {
+        menuToggleBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+            menuToggleBtn.setAttribute('aria-expanded', String(!mobileNav.classList.contains('hidden')));
+        });
+        mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+            if (window.innerWidth < 768) mobileNav.classList.add('hidden');
+        }));
+    }
+
+    loadGiftAvailability();
+});
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'none';
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+    }
+    lastFocusedElement = null;
+}
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    lastFocusedElement = document.activeElement;
+    modal.style.display = 'flex';
+    const firstFocusable = modal.querySelector('input, button, select, textarea, a[href]');
+    if (firstFocusable) firstFocusable.focus();
+}
+
+// Close any open modal with the Escape key.
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    ['physicalGiftModal', 'bankDetailsModal'].forEach((modalId) => {
+        const modal = document.getElementById(modalId);
+        if (modal && modal.style.display === 'flex') closeModal(modalId);
+    });
+});
+
+// Keep Tab focus inside an open modal.
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const openModalEl = [...document.querySelectorAll('.modal')].find((m) => m.style.display === 'flex');
+    if (!openModalEl) return;
+    const focusables = openModalEl.querySelectorAll('button, input, select, textarea, a[href]');
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+    }
+});
+
+// Cash gift: collect details, then reveal the bank details modal
+function openBankModal() {
+    const amountInput = document.getElementById('cashAmount');
+    const nameInput = document.getElementById('cashName');
+    const emailInput = document.getElementById('cashEmail');
+    const cardNumInput = document.getElementById('cashCardNum');
+
+    const amount = amountInput ? amountInput.value.trim() : '';
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const cardNum = cardNumInput ? cardNumInput.value.trim() : '';
+
+    if (!amount || !name || !email) {
+        alert('Please fill out all required fields (Amount, Name, Email).');
+        return;
+    }
+    const numericAmount = Number(amount);
+    if (!Number.isFinite(numericAmount) || numericAmount <= 0) {
+        alert('Please enter a valid amount greater than zero.');
+        return;
+    }
+
+    globalCashData = { amount, name, email, cardNum };
+
+    const bankModal = document.getElementById('bankDetailsModal');
+    if (bankModal) openModal('bankDetailsModal');
+}
+
+function copyAccount() {
+    const accElement = document.getElementById('accNum') || document.getElementById('accountNum');
+    if (!accElement) return;
+    const accNum = accElement.innerText;
+    navigator.clipboard.writeText(accNum).then(() => {
+        alert('Account number copied: ' + accNum);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        alert('Failed to copy automatically. Please copy manually.');
+    });
+}
+
+function copyAccountNumber() { copyAccount(); }
+
+// Cash gift: record the transfer intent. Never marks the payment as verified.
+async function handlePaid() {
+    const button = document.querySelector('#bankDetailsModal .paid-btn');
+    const originalLabel = button ? button.textContent : '';
+    if (button) { button.disabled = true; button.textContent = 'Submitting...'; }
+
+    try {
+        const res = await fetch(CASH_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                full_name: globalCashData.name,
+                email: globalCashData.email,
+                amount: globalCashData.amount,
+                card_num: globalCashData.cardNum || undefined,
+                request_id: newRequestId()
+            })
+        });
+        const j = await res.json();
+        if (!res.ok) throw new Error(j.error || 'failed');
+        alert(`Thank you, ${globalCashData.name || 'Guest'}! We recorded your gift of ${globalCashData.amount || ''}.`);
+    } catch (err) {
+        console.error('record payment error', err);
+        alert('Unable to record payment now. Please try again later.');
+    } finally {
+        if (button) { button.disabled = false; button.textContent = originalLabel; }
+    }
+
+    closeModal('bankDetailsModal');
+    const cashForm = document.getElementById('cashForm');
+    if (cashForm) cashForm.reset();
+    globalCashData = {};
+}
+
+// Physical gift claim: send to server, then refresh availability from the server.
+async function submitPhysicalGiftClaim() {
+    if (!currentSelectedCardElement) return alert('No item selected');
+
+    const guestName = document.getElementById('giftGuestName')?.value.trim();
+    const guestEmail = document.getElementById('giftGuestEmail')?.value.trim();
+    const cardNum = document.getElementById('physicalCardNum')?.value.trim();
+
+    if (!guestName || !guestEmail) return alert('Please provide your name and email to claim a gift.');
+
+    const itemId = currentSelectedCardElement.getAttribute('data-item');
+    const button = document.querySelector('#physicalGiftForm .submit-gift-btn');
+    const originalLabel = button ? button.textContent : '';
+    if (button) { button.disabled = true; button.textContent = 'Submitting...'; }
+
+    try {
+        const res = await fetch(CLAIM_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                guest_name: guestName,
+                email: guestEmail,
+                card_num: cardNum || undefined,
+                item_id: itemId,
+                request_id: newRequestId()
+            })
+        });
+        const j = await res.json();
+        if (!res.ok) {
+            if (res.status === 409 && j.error === 'gift_unavailable') {
+                alert('Sorry, this gift has already been fully claimed.');
+            } else {
+                throw new Error(j.error || 'failed');
+            }
+        } else {
+            alert('Gift claim recorded. Thank you!');
+        }
+    } catch (err) {
+        console.error('claim error', err);
+        alert('Could not record gift claim. Please try again later.');
+    } finally {
+        if (button) { button.disabled = false; button.textContent = originalLabel; }
+    }
+
+    closeModal('physicalGiftModal');
+    const form = document.getElementById('physicalGiftForm');
+    if (form) form.reset();
+    currentSelectedCardElement = null;
+
+    // Badges must reflect server truth.
+    loadGiftAvailability();
+}
+
+// Countdown Clock Timer
+const targetDate = new Date('2026-10-31T10:00:00').getTime();
+
+function updateCountdown() {
+    const clockElement = document.getElementById('digital-clock');
+    if (!clockElement) return;
+
+    const now = new Date().getTime();
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+        clockElement.innerText = 'The Celebration is Here!';
+        return;
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    const formattedDays = String(days).padStart(2, '0');
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    clockElement.innerText = `${formattedDays}d ${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
+<footer class="bg-gray-900 text-gray-300 py-10 px-6 text-center">
+    <p class="font-serif text-xl text-white mb-1">Ayobami &amp; Adebowale</p>
+    <p class="text-sm mb-5">October 31st, 2026 &bull; Akure, Nigeria</p>
+    <p class="text-sm leading-relaxed">
+        RSVP: <a href="tel:+2348167900645" class="text-amber-400 hover:text-amber-300 inline-block py-2">0816 790 0645</a>
+        &nbsp;&middot;&nbsp;
+        <a href="tel:+2349039738934" class="text-amber-400 hover:text-amber-300 inline-block py-2">0903 973 8934</a>
+        &nbsp;&middot;&nbsp;
+        <a href="tel:+2348140851696" class="text-amber-400 hover:text-amber-300 inline-block py-2">0814 085 1696</a>
+        &nbsp;&middot;&nbsp;
+        <a href="tel:+2347049186657" class="text-amber-400 hover:text-amber-300 inline-block py-2">0704 918 6657</a>
+    </p>
+    <p class="text-xs text-gray-500 mt-5">&copy; 2026 Ayobami &amp; Adebowale. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

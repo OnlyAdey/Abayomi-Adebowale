@@ -1,10 +1,16 @@
 {
-  "name": "my-web-app",
+  "name": "wedding-website",
   "version": "1.0.0",
+  "description": "Ayobami & Adebowale wedding gift registry - physical gifts, cash gifts, and admin dashboard.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "node --watch index.js",
+    "test:e2e": "playwright test",
+    "test:smoke": "node tests/smoke/api.smoke.js"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
@@ -13,5 +19,8 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.5",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0"
   }
 }
