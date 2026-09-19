@@ -88,7 +88,7 @@ async function api(method, url, { body, cookie } = {}) {
 
   // Catalog
   r = await api('GET', '/api/gifts');
-  check('catalog has 22 gifts', r.status === 200 && Array.isArray(r.json) && r.json.length === 22, 'len=' + (r.json && r.json.length));
+  check('catalog has 21 gifts', r.status === 200 && Array.isArray(r.json) && r.json.length === 21, 'len=' + (r.json && r.json.length));
   const g20 = r.json && r.json.find((g) => g.id === 'gift-20');
   check('gift-20 max_claims=3', g20 && g20.max_claims === 3, JSON.stringify(g20));
 

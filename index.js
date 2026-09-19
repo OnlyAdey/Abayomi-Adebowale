@@ -128,7 +128,6 @@ const GIFT_ITEMS = [
   { id: 'gift-11', name: 'Water Heater/Geyser', max: 1 },
   { id: 'gift-12', name: 'Air Fryer', max: 1 },
   { id: 'gift-13', name: 'Digital Automatic Voltage Stabilizer', max: 1 },
-  { id: 'gift-14', name: 'Multi Electric Juice Extractor', max: 1 },
   { id: 'gift-15', name: 'Hot plate', max: 1 },
   { id: 'gift-16', name: 'Pressure Pot', max: 1 },
   { id: 'gift-17', name: 'Nonstick Pot Set', max: 1 },

@@ -16,7 +16,7 @@ test.describe('Landing page', () => {
     await expect(page.locator('#gifts')).toBeVisible();
     await expect(page.locator('#cash-gift')).toBeVisible();
     await expect(page.locator('#digital-clock')).toBeVisible();
-    await expect(page.locator('.registry-item')).toHaveCount(22);
+    await expect(page.locator('.registry-item')).toHaveCount(21);
 
     // Availability badge is driven by the server response.
     await expect(page.locator('.registry-item[data-item="gift-1"] .status-badge')).toHaveText('Available');
